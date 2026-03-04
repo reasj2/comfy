@@ -17,7 +17,7 @@ jobs:
         run: docker pull vastai/comfy:v0.14.2-cuda-12.9-py312
 
       - name: Tag image
-        run: docker tag vastai/comfy:v0.14.2-cuda-12.9-py312 apmonej/TTTWAN:v0.14.2-cuda-12.9-py312
+        run: docker tag vastai/comfy:v0.14.2-cuda-12.9-py312 apmonej/tttwan:v0.14.2-cuda-12.9-py312
 
       - name: Push image
-        run: docker push apmonej/TTTWAN:v0.14.2-cuda-12.9-py312
+        run: docker push apmonej/tttwan:v0.14.2-cuda-12.9-py312
