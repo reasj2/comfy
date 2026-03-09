@@ -1,26 +1,30 @@
-name: Build Comfy Image
+name: Inspect Base Image
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build image
-        run: docker build -t apmonej/tttwan:custom .
+      - name: Pull base image
+        run: docker pull apmonej/tttwan:v0.14.2-cuda-12.9-py312
 
-      - name: Inspect image
-        run: docker run --rm apmonej/tttwan:custom sh -lc "find / -name main.py 2>/dev/null | grep -i comfy || true"
-
-      - name: Push image
-        run: docker push apmonej/tttwan:custom
+      - name: Find ComfyUI
+        run: |
+          docker run --rm apmonej/tttwan:v0.14.2-cuda-12.9-py312 sh -lc '
+            echo "=== pwd ==="
+            pwd
+            echo "=== /workspace ==="
+            ls -la /workspace || true
+            echo "=== find main.py ==="
+            find / -name main.py 2>/dev/null | grep -i comfy || true
+            echo "=== find comfy folders ==="
+            find / -maxdepth 4 -type d 2>/dev/null | grep -i comfy || true
+          '
