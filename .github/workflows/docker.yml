@@ -18,13 +18,23 @@ jobs:
 
       - name: Find ComfyUI
         run: |
-          docker run --rm apmonej/tttwan:v0.14.2-cuda-12.9-py312 sh -lc '
+          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -lc '
             echo "=== pwd ==="
             pwd
             echo "=== /workspace ==="
             ls -la /workspace || true
-            echo "=== find main.py ==="
-            find / -name main.py 2>/dev/null | grep -i comfy || true
-            echo "=== find comfy folders ==="
-            find / -maxdepth 4 -type d 2>/dev/null | grep -i comfy || true
+            echo "=== likely comfy dirs ==="
+            ls -la /workspace/ComfyUI || true
+            ls -la /ComfyUI || true
+            ls -la /app/ComfyUI || true
+            ls -la /opt/ComfyUI || true
+            ls -la /root/ComfyUI || true
+            ls -la /usr/src/app || true
+            echo "=== likely main.py ==="
+            ls -la /workspace/ComfyUI/main.py || true
+            ls -la /ComfyUI/main.py || true
+            ls -la /app/ComfyUI/main.py || true
+            ls -la /opt/ComfyUI/main.py || true
+            ls -la /root/ComfyUI/main.py || true
+            ls -la /usr/src/app/main.py || true
           '
