@@ -18,23 +18,10 @@ jobs:
 
       - name: Find ComfyUI
         run: |
-          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -lc '
-            echo "=== pwd ==="
-            pwd
-            echo "=== /workspace ==="
-            ls -la /workspace || true
-            echo "=== likely comfy dirs ==="
-            ls -la /workspace/ComfyUI || true
-            ls -la /ComfyUI || true
-            ls -la /app/ComfyUI || true
-            ls -la /opt/ComfyUI || true
-            ls -la /root/ComfyUI || true
-            ls -la /usr/src/app || true
-            echo "=== likely main.py ==="
-            ls -la /workspace/ComfyUI/main.py || true
-            ls -la /ComfyUI/main.py || true
-            ls -la /app/ComfyUI/main.py || true
-            ls -la /opt/ComfyUI/main.py || true
-            ls -la /root/ComfyUI/main.py || true
-            ls -la /usr/src/app/main.py || true
-          '
+          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -c "pwd"
+          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -c "ls -la /"
+          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -c "ls -la /workspace || true"
+          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -c "ls -la /workspace/ComfyUI || true"
+          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -c "ls -la /ComfyUI || true"
+          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -c "ls -la /app || true"
+          docker run --rm --entrypoint sh apmonej/tttwan:v0.14.2-cuda-12.9-py312 -c "ls -la /opt || true"
