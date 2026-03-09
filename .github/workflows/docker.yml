@@ -19,5 +19,8 @@ jobs:
       - name: Build image
         run: docker build -t apmonej/tttwan:custom .
 
+      - name: Inspect image
+        run: docker run --rm apmonej/tttwan:custom sh -lc "find / -name main.py 2>/dev/null | grep -i comfy || true"
+
       - name: Push image
         run: docker push apmonej/tttwan:custom
